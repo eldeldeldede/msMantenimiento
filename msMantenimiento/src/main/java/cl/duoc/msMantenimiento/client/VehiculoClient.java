@@ -9,6 +9,6 @@ import cl.duoc.msMantenimiento.dto.VehiculoDTO;
 @FeignClient(name = "msVehiculo", url = "http://localhost:8086")
 public interface VehiculoClient {
 
-    @GetMapping("/dto/{id}")
-    VehiculoDTO buscarVehiculoDTO(@PathVariable("id")Integer id);
+    @GetMapping("/api/v1/vehiculos/dto/{id}")
+    VehiculoDTO obtenerVehiculoDTO(@PathVariable("id")Integer id);
 }
