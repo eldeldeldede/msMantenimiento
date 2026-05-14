@@ -9,7 +9,6 @@ import cl.duoc.msMantenimiento.client.EmpleadoClient;
 import cl.duoc.msMantenimiento.client.VehiculoClient;
 import cl.duoc.msMantenimiento.dto.EmpleadoDTO;
 import cl.duoc.msMantenimiento.dto.MantenimientoDTO;
-import cl.duoc.msMantenimiento.dto.TipoMantenimientoDTO;
 import cl.duoc.msMantenimiento.dto.VehiculoDTO;
 import cl.duoc.msMantenimiento.model.Mantenimiento;
 import cl.duoc.msMantenimiento.repository.MantenimientoRepository;
