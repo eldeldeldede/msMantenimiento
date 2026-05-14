@@ -37,7 +37,7 @@ public class MantenimientoController {
     @PostMapping
     public ResponseEntity<Mantenimiento> guardarMantenimiento(Mantenimiento mantenimiento){
         try {
-            Mantenimiento mantenimientoNuevo = service.agregarMantenimiento(mantenimiento);
+            Mantenimiento mantenimientoNuevo = service.guardarMantenimiento(mantenimiento);
             return ResponseEntity.ok(mantenimientoNuevo);
         } catch (Exception e) {
             return ResponseEntity.noContent().build();
@@ -54,17 +54,10 @@ public class MantenimientoController {
         }
     }
 
-    @GetMapping("/dto/{id}")
-    public ResponseEntity<MantenimientoDTO> buscarMantenimientoDTO(@PathVariable Integer id){
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<MantenimientoDTO> detalleMantenimientoDTO(@PathVariable Integer id){
         try {
-            Mantenimiento mantenimiento = service.buscarMantenimientoId(id);
-            MantenimientoDTO mantenimientoDTO = new MantenimientoDTO(
-                mantenimiento.getId(),
-                mantenimiento.getFecha_mantenimiento(),
-                service.obtenerDetalleMantenimientoDTO(id).getVehiculo(),
-                service.obtenerDetalleMantenimientoDTO(id).getEmpleado(),
-                service.obtenerDetalleMantenimientoDTO(id).getTipoMantenimiento()
-            );
+            MantenimientoDTO mantenimientoDTO = service.obtenerDetalleMantenimientoDTO(id);
             return ResponseEntity.ok(mantenimientoDTO);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();

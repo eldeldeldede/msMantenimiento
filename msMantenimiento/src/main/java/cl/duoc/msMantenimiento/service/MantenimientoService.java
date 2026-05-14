@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.duoc.msMantenimiento.client.EmpleadoClient;
 import cl.duoc.msMantenimiento.client.VehiculoClient;
+import cl.duoc.msMantenimiento.dto.EmpleadoDTO;
 import cl.duoc.msMantenimiento.dto.MantenimientoDTO;
 import cl.duoc.msMantenimiento.dto.TipoMantenimientoDTO;
 import cl.duoc.msMantenimiento.dto.VehiculoDTO;
@@ -21,6 +23,9 @@ public class MantenimientoService {
     @Autowired
     private VehiculoClient clientVehiculo;
 
+    @Autowired
+    private EmpleadoClient clientEmpleado;
+
     public List<Mantenimiento> listarMantenimientos(){
         return repo.findAll();
     }
@@ -30,6 +35,20 @@ public class MantenimientoService {
     }
 
     public Mantenimiento agregarMantenimiento(Mantenimiento mantenimiento){
+        return repo.save(mantenimiento);
+    }
+
+    public Mantenimiento guardarMantenimiento(Mantenimiento mantenimiento){
+        VehiculoDTO vehiculo = clientVehiculo.obtenerVehiculoDTO(mantenimiento.getVehiculoId());
+        if(vehiculo == null){
+            throw new RuntimeException("El vehículo no existe");
+        }
+
+        EmpleadoDTO empleado = clientEmpleado.obtenerEmpleadoDTO(mantenimiento.getEmpleadoId());
+        if(empleado == null){
+            throw new RuntimeException("El empleado no existe");
+        }
+
         return repo.save(mantenimiento);
     }
 
@@ -57,13 +76,13 @@ public class MantenimientoService {
         
         VehiculoDTO vehiculo = clientVehiculo.obtenerVehiculoDTO(mantenimiento.getVehiculoId());
 
-        TipoMantenimientoDTO tipoMantenimiento = new TipoMantenimientoDTO(mantenimiento.getTipoMantenimiento().getId(), mantenimiento.getTipoMantenimiento().getNombre()); 
+        EmpleadoDTO empleado = clientEmpleado.obtenerEmpleadoDTO(mantenimiento.getEmpleadoId()); 
         
         MantenimientoDTO mantenimientoCompleto = new MantenimientoDTO();
-        mantenimientoCompleto.setId(mantenimiento.getId());
-        mantenimientoCompleto.setFecha(mantenimiento.getFecha_mantenimiento());
+        mantenimientoCompleto.setFecha(mantenimiento.getFecha_mantenimiento().toString());
         mantenimientoCompleto.setVehiculo(vehiculo);
-        mantenimientoCompleto.setTipoMantenimiento(tipoMantenimiento);
+        mantenimientoCompleto.setTipoMantenimiento(mantenimiento.getTipoMantenimiento().getNombre());
+        mantenimientoCompleto.setEmpleado(empleado);
 
         return mantenimientoCompleto;
         

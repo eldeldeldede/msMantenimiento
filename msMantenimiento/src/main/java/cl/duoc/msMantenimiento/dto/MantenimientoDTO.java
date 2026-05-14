@@ -1,7 +1,5 @@
 package cl.duoc.msMantenimiento.dto;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MantenimientoDTO {
 
-    private Integer id;
-    private Date fecha;
+    private String fecha;
     private VehiculoDTO vehiculo;
     private EmpleadoDTO empleado;
-    private TipoMantenimientoDTO tipoMantenimiento;
+    private String tipoMantenimiento;
 }
