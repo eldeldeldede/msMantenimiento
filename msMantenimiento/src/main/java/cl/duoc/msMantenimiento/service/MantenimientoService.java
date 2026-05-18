@@ -71,7 +71,7 @@ public class MantenimientoService {
     }
 
     public MantenimientoDTO obtenerDetalleMantenimientoDTO(Integer id){
-        Mantenimiento mantenimiento = repo.findById(id).orElseThrow(() -> new RuntimeException("El mantenimiento no existe"));
+        Mantenimiento mantenimiento = buscarMantenimientoId(id);
         
         VehiculoDTO vehiculo = clientVehiculo.obtenerVehiculoDTO(mantenimiento.getVehiculoId());
 
@@ -79,9 +79,9 @@ public class MantenimientoService {
         
         MantenimientoDTO mantenimientoCompleto = new MantenimientoDTO();
         mantenimientoCompleto.setFecha(mantenimiento.getFecha_mantenimiento().toString());
-        mantenimientoCompleto.setVehiculo(vehiculo);
+        mantenimientoCompleto.setPatente(vehiculo.getPatente());;
         mantenimientoCompleto.setTipoMantenimiento(mantenimiento.getTipoMantenimiento().getNombre());
-        mantenimientoCompleto.setEmpleado(empleado);
+        mantenimientoCompleto.setRut(empleado.getRut());
 
         return mantenimientoCompleto;
         

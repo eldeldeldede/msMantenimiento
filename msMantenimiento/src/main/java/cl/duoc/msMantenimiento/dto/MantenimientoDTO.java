@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class MantenimientoDTO {
 
     private String fecha;
-    private VehiculoDTO vehiculo;
-    private EmpleadoDTO empleado;
+    private String patente;
+    private String rut;
     private String tipoMantenimiento;
 }
