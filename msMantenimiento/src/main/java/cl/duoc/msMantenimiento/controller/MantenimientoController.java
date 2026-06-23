@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.duoc.msMantenimiento.dto.MantenimientoDTO;
 import cl.duoc.msMantenimiento.model.Mantenimiento;
 import cl.duoc.msMantenimiento.service.MantenimientoService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("api/v1/mantenimiento")
@@ -25,6 +26,9 @@ public class MantenimientoController {
     private MantenimientoService service;
 
     @GetMapping
+    @Operation(summary = "Listar mantenimientos", 
+               description = "Obtiene una lista de todos los mantenimientos registrados"
+        )
     public ResponseEntity<List<Mantenimiento>>listar(){
         try {
             List<Mantenimiento> mantenimientos = service.listarMantenimientos();
@@ -35,6 +39,9 @@ public class MantenimientoController {
     }   
 
     @PostMapping
+    @Operation(summary = "Guardar mantenimiento", 
+               description = "Crea un nuevo mantenimiento"
+        )
     public ResponseEntity<Mantenimiento> guardarMantenimiento(Mantenimiento mantenimiento){
         try {
             Mantenimiento mantenimientoNuevo = service.guardarMantenimiento(mantenimiento);
@@ -45,6 +52,10 @@ public class MantenimientoController {
     }
 
     @GetMapping("/id/{id}")
+    @Operation(summary = "Buscar mantenimiento por ID", 
+               description = "Obtiene un mantenimiento específico por su ID"
+        )
+
     public ResponseEntity<Mantenimiento> buscarPorId(@PathVariable Integer id){
         try {
             Mantenimiento mantenimiento = service.buscarMantenimientoId(id);
@@ -55,6 +66,9 @@ public class MantenimientoController {
     }
 
     @GetMapping("/detalle/{id}")
+    @Operation(summary = "Detalle de mantenimiento", 
+               description = "Obtiene los detalles de un mantenimiento específico por su ID"
+        )
     public ResponseEntity<MantenimientoDTO> detalleMantenimientoDTO(@PathVariable Integer id){
         try {
             MantenimientoDTO mantenimientoDTO = service.obtenerDetalleMantenimientoDTO(id);
@@ -65,6 +79,9 @@ public class MantenimientoController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Actualizar mantenimiento", 
+               description = "Actualiza la información de un mantenimiento específico por su ID"
+        )
     public ResponseEntity<Mantenimiento> actualizarMantenimiento(@PathVariable Integer id,@RequestBody Mantenimiento mantenimientoActualizado){
         try {
             Mantenimiento mantenimiento = service.actualizarMantenimiento(id, mantenimientoActualizado);
@@ -75,6 +92,9 @@ public class MantenimientoController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar mantenimiento", 
+               description = "Elimina un mantenimiento específico por su ID"
+        )
     public ResponseEntity<Mantenimiento> eliminarMantenimiento(@PathVariable Integer id){
         try {
             service.eliminarMantenimiento(id);
