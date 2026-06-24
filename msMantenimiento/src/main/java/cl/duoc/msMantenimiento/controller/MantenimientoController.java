@@ -17,9 +17,11 @@ import cl.duoc.msMantenimiento.dto.MantenimientoDTO;
 import cl.duoc.msMantenimiento.model.Mantenimiento;
 import cl.duoc.msMantenimiento.service.MantenimientoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("api/v1/mantenimiento")
+@Tag(name = "Mantenimiento", description = "Controlador para gestionar los mantenimientos")
 public class MantenimientoController {
 
     @Autowired
