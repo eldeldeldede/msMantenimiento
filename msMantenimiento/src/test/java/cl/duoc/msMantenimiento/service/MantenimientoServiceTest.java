@@ -102,15 +102,6 @@ public class MantenimientoServiceTest {
     }
 
     @Test
-    void agregarMantenimiento_exitoso() {
-        when(repo.save(ejemMantenimiento)).thenReturn(ejemMantenimiento);
-
-        Mantenimiento resultado = service.agregarMantenimiento(ejemMantenimiento);
-
-        assertEquals(ejemMantenimiento, resultado);
-    }
-
-    @Test
     void guardarMantenimiento_exitoso() {
         when(clientVehiculo.obtenerVehiculoDTO(20)).thenReturn(ejemVehiculo);
         when(clientEmpleado.obtenerEmpleadoDTO(10)).thenReturn(ejemEmpleado);

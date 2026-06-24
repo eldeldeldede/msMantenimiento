@@ -33,10 +33,6 @@ public class MantenimientoService {
         return repo.findById(id).orElseThrow(() -> new RuntimeException("El mantenimiento no existe"));
     }
 
-    public Mantenimiento agregarMantenimiento(Mantenimiento mantenimiento){
-        return repo.save(mantenimiento);
-    }
-
     public Mantenimiento guardarMantenimiento(Mantenimiento mantenimiento){
         VehiculoDTO vehiculo = clientVehiculo.obtenerVehiculoDTO(mantenimiento.getVehiculoId());
         if(vehiculo == null){
