@@ -100,7 +100,7 @@ public class MantenimientoController {
     public ResponseEntity<Mantenimiento> eliminarMantenimiento(@PathVariable Integer id){
         try {
             service.eliminarMantenimiento(id);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }

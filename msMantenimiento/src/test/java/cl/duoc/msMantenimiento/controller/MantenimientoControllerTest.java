@@ -172,7 +172,7 @@ public class MantenimientoControllerTest {
         doNothing().when(service).eliminarMantenimiento(1);
 
         mock.perform(delete("/api/v1/mantenimiento/1"))
-            .andExpect(status().isOk());
+            .andExpect(status().isNoContent());
     }
 
     @Test
